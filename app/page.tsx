@@ -1,65 +1,123 @@
-import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+
+import Image from "next/image";
+import Link from "next/link";
+
+export default function Home(){
+  return(
+    <>
+      <header className="w-full p-6 bg-gray-900 text-white flex items-center">
+        
+        {/*Logo*/}
+        <Link href="/">
+          <Image
+            src="/images/Haven-Logo.png"  // path to your PNG in public/images
+            alt="Haven Logo"
+            width={250}             // adjust width as needed
+            height={0}             // adjust height as needed
+            
+          />
+        </Link>
+
+        <nav className="space-x-25 ml-70 font-sans text-l">
+          
+          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Backtesting</a>
+          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">About Us</a>
+          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Trading Hub</a>
+          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Strategies</a>
+          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Contact</a>
+          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">A.I. In Trading</a>
+        </nav>
+      </header>
+    
+
+
+      <main className="flex flex-col items-center justify-center text-center py-10 bg-gray-700 dark:bg-gray-900">
+        
+        {/* Graphic */}
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+          src="/images/stock-image-cartoon.png"
+          alt="Trading Graphic"
+          width={1400}  // adjust size
+          height={300} // adjust size
+          className="mb-7 transition-transform duration-300 hover:scale-110 hover:opacity-70"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        <h1 className="text-5xl font-bold mb-6 text-white dark:text-white">Welcome To The Haven Project</h1>
+        <p className = "text-lg text-white dark:text-gray-300 max-w-xxl mb-8">Your all-in-one platform for trading | backtesting and AI-powered strategies.</p>
+        <a href = "/backtesting" className = "px-6 py-3 bg-cyan-500 text-white font-bold rounded-lg hover:bg-cyan-600 transition-colors duration-200">Learn More </a>
       </main>
-    </div>
+
+
+        <section className="bg-gray-900 text-white py-20 px-24 grid grid-cols-2 gap-10 items-start">
+          <div>
+            <h2 className="text-3xl text-white font-bold mb-9 self-start ml-68">BackTest With Haven Today</h2>
+            <p className="text-xl text-white font-bold self-start max-w-[550px] ml-50 text-center" >
+              Backtesting allows you to evaluate your trading ideas using real historical market data—before 
+              risking any money. HAVEN’s backtester gives you clear performance metrics, visual trade analysis, 
+              and customizable strategy settings, so you can refine your approach with confidence. Whether you're experimenting with 
+              simple indicators or testing advanced algorithmic systems, our tools help you understand how your strategy would have performed 
+              in real market conditions.</p>
+          </div>
+
+          <div className="flex justify-center"> 
+          {/* Graphic */}
+          <Image
+            src="/images/clock-cartoon.png"
+            alt="Clock"
+            width={300}  // adjust size
+            height={300} // adjust size
+            className="mb-5 transition-transform duration-300 hover:scale-110 hover:opacity-70"
+            />
+          </div>
+
+        </section>
+
+
+        <section className="bg-gray-800 text-white py-12 px-24 grid grid-cols-2 gap-10 items-start mb-0">
+          <div>
+           <Image
+            src="/images/ai-cartoon.png"
+            alt="Robot"
+            width={350}  // adjust size
+            height={300} // adjust size
+            className="mb-7 ml-75 transition-transform duration-300 hover:scale-110 hover:opacity-70"
+            />
+
+            
+          </div>
+         <div className = "py-10">
+           <h3 className="text-3xl text-white font-bold mb-9 self-start ml-45">Change Your Strategy With A.I.</h3>
+           <p className = "text-xl text-white font-bold max-w-[550px] ml-30 text-center">
+            Harness the power of AI to refine, optimize, and adapt your trading strategy in real time. HAVEN’s intelligent tools analyze market 
+            behavior, detect patterns, and generate data-driven insights—helping you trade smarter, faster, and with confidence.</p>
+         </div>
+    
+        </section>
+      
+
+
+
+      <footer className="w-full bg-gray-900 text-white py-8 mt-0">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-center md:text-left mb-4 md:mb-0">
+            <h4 className="text-xl font-bold ml-12">HAVEN</h4>
+            <p className="text-gray-400 text-sm">Your trusted trading toolkit.</p>
+          </div>
+
+          <div className="flex space-x-6 text-gray-300 text-sm mr-0">
+            <a href="#" className="hover:text-cyan-400">About</a>
+            <a href="#" className="hover:text-cyan-400">Contact</a>
+            <a href="#" className="hover:text-cyan-400">Privacy</a>
+            <a href="#" className="hover:text-cyan-400">Terms</a>
+          </div>
+          </div>
+
+       
+      </footer>
+    </>
+
+
+
+
   );
 }
