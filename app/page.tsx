@@ -6,33 +6,36 @@ import Link from "next/link";
 export default function Home(){
   return(
     <>
-      <header className="w-full p-6 bg-gray-900 text-white flex items-center">
+      <header className="w-full p-8 bg-gray-900 text-white flex items-center">
         
         {/*Logo*/}
         <Link href="/">
           <Image
-            src="/images/Haven-Logo.png"  // path to your PNG in public/images
+            src="/images/logo-white.png"  // path to your PNG in public/images
             alt="Haven Logo"
-            width={250}             // adjust width as needed
+            width={225}             // adjust width as needed
             height={0}             // adjust height as needed
+            className = "ml-4"
             
           />
         </Link>
 
-        <nav className="space-x-25 ml-70 font-sans text-l">
+        <nav className="space-x-22 ml-60 font-sans text-l">
           
           <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Backtesting</a>
           <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">About Us</a>
           <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Trading Hub</a>
           <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Strategies</a>
           <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Contact</a>
-          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">A.I. In Trading</a>
+          
+          <a href="URL" className="bg-cyan-500 border border-white text-white font-bold px-3 py-3 rounded-lg ml-40 hover:bg-cyan-600 hover:text-gray-900 transition-all duration-200">Log In  |  Sign Up</a>
+
         </nav>
       </header>
     
 
 
-      <main className="flex flex-col items-center justify-center text-center py-10 bg-gray-700 dark:bg-gray-900">
+      <main className="flex flex-col items-center justify-center text-center py-10 bg-gray-800 dark:bg-gray-900">
         
         {/* Graphic */}
         <Image
@@ -48,10 +51,10 @@ export default function Home(){
       </main>
 
 
-        <section className="bg-gray-900 text-white py-20 px-24 grid grid-cols-2 gap-10 items-start">
-          <div>
-            <h2 className="text-3xl text-white font-bold mb-9 self-start ml-68">BackTest With Haven Today</h2>
-            <p className="text-xl text-white font-bold self-start max-w-[550px] ml-50 text-center" >
+        <section className="bg-gray-900 text-white py-20 px-24 grid grid-cols-2 gap-0 items-start">
+          <div className = "flex flex-col items-center text-center">
+            <h2 className="text-3xl text-white font-bold mb-9  ">BackTest With Haven Today</h2>
+            <p className="text-xl text-white font-bold max-w-[650px]" >
               Backtesting allows you to evaluate your trading ideas using real historical market data—before 
               risking any money. HAVEN’s backtester gives you clear performance metrics, visual trade analysis, 
               and customizable strategy settings, so you can refine your approach with confidence. Whether you're experimenting with 
@@ -59,7 +62,7 @@ export default function Home(){
               in real market conditions.</p>
           </div>
 
-          <div className="flex justify-center"> 
+          <div className = "flex flex-col items-center text-center"> 
           {/* Graphic */}
           <Image
             src="/images/clock-cartoon.png"
@@ -73,27 +76,75 @@ export default function Home(){
         </section>
 
 
-        <section className="bg-gray-800 text-white py-12 px-24 grid grid-cols-2 gap-10 items-start mb-0">
-          <div>
+        <section className="bg-gray-800 text-white py-12 px-24 grid grid-cols-2 gap-0 items-start mb-0">
+          <div className = "flex flex-col items-center text-center">
            <Image
             src="/images/ai-cartoon.png"
             alt="Robot"
             width={350}  // adjust size
             height={300} // adjust size
-            className="mb-7 ml-75 transition-transform duration-300 hover:scale-110 hover:opacity-70"
+            className="mb-7  transition-transform duration-300 hover:scale-110 hover:opacity-70"
             />
 
             
           </div>
-         <div className = "py-10">
-           <h3 className="text-3xl text-white font-bold mb-9 self-start ml-45">Change Your Strategy With A.I.</h3>
-           <p className = "text-xl text-white font-bold max-w-[550px] ml-30 text-center">
+         <div className = "flex flex-col items-center text-center py-15">
+           <h3 className="text-3xl text-white font-bold mb-9  ">Change Your Strategy With A.I.</h3>
+           <p className = "text-xl text-white font-bold max-w-[650px] ">
             Harness the power of AI to refine, optimize, and adapt your trading strategy in real time. HAVEN’s intelligent tools analyze market 
             behavior, detect patterns, and generate data-driven insights—helping you trade smarter, faster, and with confidence.</p>
          </div>
     
         </section>
       
+        <section className="bg-gray-900 text-white py-15 px-24 grid grid-cols-2 gap-10">
+          <div className = "flex flex-col items-center text-center">
+            <h4 className=" text-3xl text-white font-bold mb-9 self-">Testing Indicators</h4>
+            <p className="text-xl text-white font-bold max-w-[550px]" >
+              Analyze how individual indicators perform before adding them to your strategy. HAVEN lets you test moving averages, 
+              RSI, MACD, volume signals, and more using real historical data. See how each indicator reacts to different market conditions, 
+              understand its strengths and limitations, and build smarter strategies backed by data—not guesses.</p>
+          </div>
+
+          <div className = "flex flex-col items-center text-center">
+          {/* Graphic */}
+          <Image
+            src="/images/indicator-cartoon.png"
+            alt="Clock"
+            width={300}  // adjust size
+            height={300} // adjust size
+            className="mb-5 transition-transform duration-300 hover:scale-110 hover:opacity-70"
+            />
+          </div>
+
+        </section>
+
+
+        <section className="bg-gray-800 text-white py-12 px-24 items-start mb-0">
+            
+
+          <div className = "flex flex-col items-center text-center py-0 ">
+            <Image
+              src="/images/contact-cartoon.png"
+              alt="Phone"
+              width={100}  // adjust size
+              height={300} // adjust size
+              className="  transition-transform duration-300 hover:scale-110 hover:opacity-70 mb-9"
+              />
+          </div>
+
+          <div className = "flex flex-col items-center text-center">
+            <h3 className="text-3xl text-white font-bold mb-9  ">Get In Touch With A Haven Representative Today!</h3>
+            <p className = "text-xl text-white font-bold max-w-[650px] mb-12">
+              Have questions or need help getting started? Our Haven team is here to guide you. Whether you're exploring backtesting, 
+              AI-powered strategies, or platform features, a dedicated representative will provide clear, personalized support to help 
+              you make the most of your trading journey.</p>
+            <a href = "/backtesting" className = "px-4 text-2xl text-white font-bold bg-cyan-400 border-white rounded-xl hover:bg-cyan-600 transition-all duration-250">Contact Us</a>
+          </div>
+          </section>
+
+
+
 
 
 
