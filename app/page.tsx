@@ -1,37 +1,11 @@
 
-
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home(){
   return(
     <>
-      <header className="w-full p-8 bg-gray-900 text-white flex items-center">
-        
-        {/*Logo*/}
-        <Link href="/">
-          <Image
-            src="/images/logo-white.png"  // path to your PNG in public/images
-            alt="Haven Logo"
-            width={225}             // adjust width as needed
-            height={0}             // adjust height as needed
-            className = "ml-4"
-            
-          />
-        </Link>
-
-        <nav className="space-x-22 ml-60 font-sans text-l">
-          
-          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Backtesting</a>
-          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">About Us</a>
-          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Trading Hub</a>
-          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Strategies</a>
-          <a href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Contact</a>
-          
-          <a href="URL" className="bg-cyan-500 border border-white text-white font-bold px-3 py-3 rounded-lg ml-40 hover:bg-cyan-600 hover:text-gray-900 transition-all duration-200">Log In  |  Sign Up</a>
-
-        </nav>
-      </header>
+      
     
 
 
@@ -47,7 +21,7 @@ export default function Home(){
         />
         <h1 className="text-5xl font-bold mb-6 text-white dark:text-white">Welcome To The Haven Project</h1>
         <p className = "text-lg text-white dark:text-gray-300 max-w-xxl mb-8">Your all-in-one platform for trading | backtesting and AI-powered strategies.</p>
-        <a href = "/backtesting" className = "px-6 py-3 bg-cyan-500 text-white font-bold rounded-lg hover:bg-cyan-600 transition-colors duration-200">Learn More </a>
+        <a href = "/backtesting" className = "px-6 py-3 bg-cyan-500 text-white font-bold rounded-lg hover:bg-green-400 transition-colors duration-200">Backtest Today </a>
       </main>
 
 

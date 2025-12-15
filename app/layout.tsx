@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import Image from "next/image";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,8 +30,44 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
+
+
+        {/* Persistent Navbar */}
+        <header className="w-full p-8 bg-gray-900 text-white flex items-center">
+          
+        {/*Logo*/}
+        <Link href="/">
+          <Image
+            src="/images/logo-white.png"  // path to your PNG in public/images
+            alt="Haven Logo"
+            width={225}             // adjust width as needed
+            height={0}             // adjust height as needed
+            className = "ml-4"
+            
+          />
+        </Link>
+
+        <nav className="space-x-22 ml-60 font-sans text-l">
+          
+          
+          <Link href="/backtesting" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Backtesting</Link>
+          <Link href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">About Us</Link>
+          <Link href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Trading Hub</Link>
+          <Link href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Strategies</Link>
+          <Link href="URL" className="text-white font-bold px-3 py-1 hover:border-b-2 hover:border-cyan-400">Contact</Link>
+          
+          <a href="URL" className="bg-cyan-500 border border-white text-white font-bold px-3 py-2 rounded-lg ml-40 hover:bg-cyan-600 hover:text-gray-900 transition-all duration-200">Log In  |  Sign Up</a>
+
+        </nav>
+      </header>
+
+
+
         {children}
       </body>
     </html>
+
+
   );
 }
