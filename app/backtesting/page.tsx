@@ -22,6 +22,11 @@ export default function BacktestingPage() {
   const [selectedStock, setSelectedStock] = useState<any>(null);
   const [basket, setBasket] = useState<any[]>([]);
   const [activeBasketItem, setActiveBasketItem] = useState<any>(null);
+
+  const [timeFrameYears, setTimeFrameYears] = useState<number>(2);
+  const [candleInterval, setCandleInterval] = useState<string>("60");
+  const [startingEquity, setStartingEquity] = useState<number>(100);
+
   const [stockBasket, setStockBasket] = useState<any[]>([]);
   const [newStock, setNewStock] = useState("");
   const [assetType, setAssetType] = useState<"stock" | "etf">("stock");
@@ -29,6 +34,67 @@ export default function BacktestingPage() {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A28FFF', '#FF6699', '#33CC99', '#FF9933'];
   const totalWeight = basket.reduce((sum, item) => sum + (Number(item.currentWeight) || 0),0);
   
+
+  // Test downlaod for JSON//
+  const downloadSimulationPayload = () => {
+  const payload = buildSimulationPayload();
+
+  const json = JSON.stringify(payload, null, 2); // pretty-print
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "simulation-payload.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+};
+  //Building json for backend this is the block of info in one variable//
+  const buildSimulationPayload = () => {return {
+    assetType,
+    assets: stockBasket.map((s) => s.id),
+    simulation: {
+      timeFrameYears,
+      candleInterval,
+      startingEquity,
+    },
+
+    indicators: basket.map((indicator) => ({
+      id: indicator.id,
+      window: indicator.currentWindow,
+      highThreshold: indicator.currentHighThreshold,
+      lowThreshold: indicator.currentLowThreshold,
+      weight: indicator.currentWeight,})),};};
+  
+
+
+  //Run simulation function (This function sends the info to the backend when clicking the run button)//
+  const runSimulation = async () => {
+  const payload = buildSimulationPayload();
+
+  console.log("Sending simulation payload:", payload);
+  try {
+    const res = await fetch("/api/run-simulation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      throw new Error("Simulation request failed");
+    }
+
+    const data = await res.json();
+    console.log("Simulation result:", data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+
   // Handle stock upload constant is A.I.
   const handleStockUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
   const file = e.target.files?.[0];if (!file) return;const reader = new FileReader();reader.onload = (event) => {const text = event.target.result?.toString();
@@ -355,18 +421,22 @@ export default function BacktestingPage() {
       <div
         className="grid grid-cols-[220px_1fr] gap-x-19 gap-y-6 py-7 px-12 text-xl items-center"
         style={{ fontFamily: "Ethnocentric, sans-serif" }}>
-    {/* Row 1 */}
+    {/*Time frame*/}
     <h4 className="text-black text-right whitespace-nowrap">
       Time Frame (YRS)
     </h4>
     <input
       type="number"
+      value={timeFrameYears}
+      onChange={(e) => setTimeFrameYears(Number(e.target.value))}
       className="border-gray-400/60 w-full border-3 py-1 text-black rounded-xl text-center focus:outline-none focus:ring-0 focus:border-gray-200"
       placeholder="Enter 1-10"/>
 
     {/* Candle Interval */}
 <h4 className="text-black text-right whitespace-nowrap">Candle Interval</h4>
 <select
+  value={candleInterval}
+  onChange={(e) => setCandleInterval(e.target.value)}
   className="border-gray-400/60 w-full border-3 py-1 text-black rounded-xl text-center bg-white
              focus:outline-none focus:ring-0 focus:border-gray-200"
 >
@@ -376,7 +446,7 @@ export default function BacktestingPage() {
   <option value="1440m">Daily</option>
 </select>
 
-    {/* Row 3 */}
+    {/* Starting equity */}
     <h4 className="text-black">
   Starting Equity
   <span className="ml-1 text-xs text-gray-400">(thousands)</span>
@@ -384,13 +454,15 @@ export default function BacktestingPage() {
   
     <input
       type="number"
+      value={startingEquity}
+      onChange={(e) => setStartingEquity(Number(e.target.value))}
       className="border-gray-400/60 w-full border-3 py-1 text-black rounded-xl text-center focus:outline-none focus:ring-0 focus:border-gray-200"
       placeholder="10000"/>
   </div>
 
   <div>
     <button 
-    onClick={() => {if (!newStock) return;}}
+    onClick={runSimulation}
     className="text-l mt-8 py-3 px-8 border-3 border-cyan-500 bg-cyan-300 rounded-2xl text-white font-bold hover:bg-green-400 transition hover:border-green-600"style={{ fontFamily: "Ethnocentric, sans-serif" }}> Run Simulation
     
     </button>

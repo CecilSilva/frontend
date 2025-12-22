@@ -1,0 +1,48 @@
+{
+  "assetType": "stock",
+  "assets": [
+    "AAPL",
+    "NVDA",
+    "GOOG",
+    "NKLA",
+    "ABC",
+    "ABS",
+    "QBTC",
+    "CBS"
+  ],
+  "simulation": {
+    "timeFrameYears": 2,
+    "candleInterval": "60",
+    "startingEquity": 100
+  },
+  "indicators": [
+    {
+      "id": "rsi",
+      "window": 14,
+      "highThreshold": 70,
+      "lowThreshold": 30,
+      "weight": 25
+    },
+    {
+      "id": "sma",
+      "window": 20,
+      "highThreshold": 0,
+      "lowThreshold": 0,
+      "weight": 25
+    },
+    {
+      "id": "ema",
+      "window": 12,
+      "highThreshold": 0,
+      "lowThreshold": 0,
+      "weight": 25
+    },
+    {
+      "id": "atr",
+      "window": 14,
+      "highThreshold": 0,
+      "lowThreshold": 0,
+      "weight": 25
+    }
+  ]
+}
