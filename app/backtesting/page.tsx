@@ -4,16 +4,16 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recha
 
 
 const INDICATORS = [
-  { id: "rsi", name: "RSI", fullName: "Relative Strength Index", description: "A momentum oscillator that measures the speed and change of price movements to identify overbought or oversold conditions.", currentWindow: 14, currentHighThreshold: 70, currentLowThreshold: 30, currentWeight: 25 },
-  { id: "sma", name: "SMA", fullName: "Simple Moving Average", description: "A trend-following indicator that calculates the average of a selected range of prices, smoothing out price fluctuations to identify the underlying trend.", currentWindow: 20, currentHighThreshold: 0, currentLowThreshold: 0, currentWeight: 25 },
-  { id: "ema", name: "EMA", fullName: "Exponential Moving Average", description: "A moving average that places greater weight on recent prices to respond more quickly to new information compared to a simple moving average.", currentWindow: 12, currentHighThreshold: 0, currentLowThreshold: 0, currentWeight: 25 },
-  { id: "macd", name: "MACD", fullName: "Moving Average Convergence Divergence", description: "A trend-following momentum indicator that shows the relationship between two moving averages of a security’s price to indicate bullish or bearish momentum.", currentWindow: 26, currentHighThreshold: 0, currentLowThreshold: 0, currentWeight: 25 },
-  { id: "bollinger", name: "Bollinger Bands", fullName: "Bollinger Bands", description: "A volatility indicator that plots bands above and below a moving average to indicate overbought or oversold levels based on price deviations.", currentWindow: 20, currentHighThreshold: 2, currentLowThreshold: 2, currentWeight: 25 },
-  { id: "stoch", name: "Stochastic Oscillator", fullName: "Stochastic Oscillator", description: "A momentum indicator comparing a particular closing price to a range of prices over a period to identify potential trend reversals.", currentWindow: 14, currentHighThreshold: 80, currentLowThreshold: 20, currentWeight: 25 },
-  { id: "adx", name: "ADX", fullName: "Average Directional Index", description: "A trend strength indicator that quantifies the strength of a trend without indicating its direction, useful for identifying strong trends.", currentWindow: 14, currentHighThreshold: 25, currentLowThreshold: 0, currentWeight: 25 },
-  { id: "obv", name: "OBV", fullName: "On-Balance Volume", description: "A cumulative volume-based indicator that relates volume flow to price changes, helping to predict potential bullish or bearish moves.", currentWindow: 0, currentHighThreshold: 0, currentLowThreshold: 0, currentWeight: 25 },
-  { id: "cci", name: "CCI", fullName: "Commodity Channel Index", description: "A versatile indicator that measures the deviation of the price from its statistical mean to detect cyclical trends and overbought/oversold conditions.", currentWindow: 20, currentHighThreshold: 100, currentLowThreshold: -100, currentWeight: 25 },
-  { id: "atr", name: "ATR", fullName: "Average True Range", description: "A volatility indicator that measures the degree of price movement for a given period, helping to identify market volatility and potential stop-loss levels.", currentWindow: 14, currentHighThreshold: 0, currentLowThreshold: 0, currentWeight: 25 },
+  { id: "rsi", name: "RSI", fullName: "Relative Strength Index", description: "A momentum oscillator that measures the speed and change of price movements to identify overbought or oversold conditions.", currentBuyWindow: 14, currentSellWindow:14, currentBuyThreshold: 70, currentSellThreshold: 30, currentWeight: 25 },
+  { id: "sma", name: "SMA", fullName: "Simple Moving Average", description: "A trend-following indicator that calculates the average of a selected range of prices, smoothing out price fluctuations to identify the underlying trend.", currentBuyWindow: 20, currentSellWindow:20, currentBuyThreshold: 0, currentSellThreshold: 0, currentWeight: 25 },
+  { id: "ema", name: "EMA", fullName: "Exponential Moving Average", description: "A moving average that places greater weight on recent prices to respond more quickly to new information compared to a simple moving average.", currentBuyWindow: 12, currentSellWindow:12, currentBuyThreshold: 0, currentSellThreshold: 0, currentWeight: 25 },
+  { id: "macd", name: "MACD", fullName: "Moving Average Convergence Divergence", description: "A trend-following momentum indicator that shows the relationship between two moving averages of a security’s price to indicate bullish or bearish momentum.", currentBuyWindow: 26, currentSellWindow:26, currentBuyThreshold: 0, currentSellThreshold: 0, currentWeight: 25 },
+  { id: "bollinger", name: "Bollinger Bands", fullName: "Bollinger Bands", description: "A volatility indicator that plots bands above and below a moving average to indicate overbought or oversold levels based on price deviations.", currentBuyWindow: 20, currentSellWindow:20, currentBuyThreshold: 2, currentSellThreshold: 2, currentWeight: 25 },
+  { id: "stoch", name: "Stochastic Oscillator", fullName: "Stochastic Oscillator", description: "A momentum indicator comparing a particular closing price to a range of prices over a period to identify potential trend reversals.", currentBuyWindow: 14, currentSellWindow:14, currentBuyThreshold: 80, currentSellThreshold: 20, currentWeight: 25 },
+  { id: "adx", name: "ADX", fullName: "Average Directional Index", description: "A trend strength indicator that quantifies the strength of a trend without indicating its direction, useful for identifying strong trends.", currentBuyWindow: 14, currentSellWindow:14, currentBuyThreshold: 25, currentSellThreshold: 0, currentWeight: 25 },
+  { id: "obv", name: "OBV", fullName: "On-Balance Volume", description: "A cumulative volume-based indicator that relates volume flow to price changes, helping to predict potential bullish or bearish moves.", currentBuyWindow: 0, currentSellWindow:0, currentBuyThreshold: 0, currentSellThreshold: 0, currentWeight: 25 },
+  { id: "cci", name: "CCI", fullName: "Commodity Channel Index", description: "A versatile indicator that measures the deviation of the price from its statistical mean to detect cyclical trends and overbought/oversold conditions.", currentBuyWindow: 20, currentSellWindow:20, currentBuyThreshold: 100, currentSellThreshold: -100, currentWeight: 25 },
+  { id: "atr", name: "ATR", fullName: "Average True Range", description: "A volatility indicator that measures the degree of price movement for a given period, helping to identify market volatility and potential stop-loss levels.", currentBuyWindow: 14, currentSellWindow:14, currentBuyThreshold: 0, currentSellThreshold: 0, currentWeight: 25 },
 ];
 
 
@@ -26,6 +26,7 @@ export default function BacktestingPage() {
   const [timeFrameYears, setTimeFrameYears] = useState<number>(2);
   const [candleInterval, setCandleInterval] = useState<string>("60");
   const [startingEquity, setStartingEquity] = useState<number>(100);
+  const [stockNumber, setStockNumber] = useState<number>(10);
 
   const [stockBasket, setStockBasket] = useState<any[]>([]);
   const [newStock, setNewStock] = useState("");
@@ -146,16 +147,16 @@ export default function BacktestingPage() {
         {/* LEFT: Indicator Settings */}
           <div className=" w-200   rounded-xl p-6  py-6 justify-center">
         {/* Header with the indicator name */}
-            <h2 className="text-white text-2xl font-bold text-center mb-4">{activeBasketItem.name} Settings</h2>
+            <h2 className="text-white text-2xl font-bold text-center mb-4">{activeBasketItem.name}  Buy Settings</h2>
 
 
             <div className="flex gap-4">
 
-            {/* Window */}
+            {/* Window For Buying*/}
             <div className="border-4 border-cyan-800 rounded-4xl p-4 w-60 text-center bg-cyan-700">
               <p className="font-bold text-white">Window</p>
-              <input type="number" className="border-gray-100/60 mt-2 w-full border-3 px-2 py-1 text-white rounded-xl text-center focus:outline-none focus:ring-0 focus:border-cyan-500" value={activeBasketItem?.currentWindow ?? ''}onChange={(e) => {const newValue = Number(e.target.value);
-            setActiveBasketItem({ ...activeBasketItem,currentWindow: newValue, });
+              <input type="number" className="border-gray-100/60 mt-2 w-full border-3 px-2 py-1 text-white rounded-xl text-center focus:outline-none focus:ring-0 focus:border-cyan-500" value={activeBasketItem?.currentBuyWindow ?? ''}onChange={(e) => {const newValue = Number(e.target.value);
+            setActiveBasketItem({ ...activeBasketItem,currentBuyWindow: newValue, });
       
             // Also update it in the basket array
             setBasket((prev) =>
@@ -165,29 +166,20 @@ export default function BacktestingPage() {
                   : item));}}
               />
             </div>
-            {/* Threshold */}
+            {/* Threshold For Buying*/}
               <div className="border-4 border-cyan-800 rounded-4xl p-4 w-60 text-center bg-cyan-700">
-                <p className="font-bold text-white">Threshold</p>
-                <input type="number" placeholder="50" className="border-gray-100/60 mt-2 w-full border-3 px-2 py-1 text-white rounded-xl text-center focus:outline-none focus:ring-0 focus:border-cyan-500" value={activeBasketItem?.currentHighThreshold ?? ''}onChange={(e) => {const newValue = Number(e.target.value);
-            setActiveBasketItem({ ...activeBasketItem,currentHighThreshold: newValue, });
+                <p className="font-bold text-white">Buying Threshold</p>
+                <input type="number" placeholder="50" className="border-gray-100/60 mt-2 w-full border-3 px-2 py-1 text-white rounded-xl text-center focus:outline-none focus:ring-0 focus:border-cyan-500" value={activeBasketItem?.currentBuyThreshold ?? ''}onChange={(e) => {const newValue = Number(e.target.value);
+            setActiveBasketItem({ ...activeBasketItem,currentBuyThreshold: newValue, });
       
             // Also update it in the basket array
             setBasket((prev) =>
               prev.map((item) =>
                 item.id === activeBasketItem.id
-                  ? { ...item, currentHighThreshold: newValue }
+                  ? { ...item, currentBuyThreshold: newValue }
                   : item));}}
               />
-                <input type="number" placeholder="30" className="border-gray-100/60 mt-2 w-full border-3 px-2 py-1 text-white rounded-xl text-center focus:outline-none focus:ring-0 focus:border-cyan-500" value={activeBasketItem?.currentLowThreshold ?? ''}onChange={(e) => {const newValue = Number(e.target.value);
-            setActiveBasketItem({ ...activeBasketItem,currentLowThreshold: newValue, });
-      
-            // Also update it in the basket array
-            setBasket((prev) =>
-              prev.map((item) =>
-                item.id === activeBasketItem.id
-                  ? { ...item, currentLowThreshold: newValue }
-                  : item));}}
-              />
+                
               </div>
 
               {/* Weight */}
@@ -205,7 +197,45 @@ export default function BacktestingPage() {
               />
               </div>
             </div>
+            
+            {/* INDICATOR SELLING SETTINGS */}
+            <div className="">
+              <h2 className="mt-5 text-white text-2xl font-bold text-center mb-4">{activeBasketItem.name} Sell Settings</h2>
+              <div className="flex gap-4 justify-center">
+              {/* Window For Sell*/}
+            <div className="border-4 border-cyan-800 rounded-4xl p-4 w-60 text-center bg-cyan-700">
+              <p className="font-bold text-white">Window</p>
+              <input type="number" className="border-gray-100/60 mt-2 w-full border-3 px-2 py-1 text-white rounded-xl text-center focus:outline-none focus:ring-0 focus:border-cyan-500" value={activeBasketItem?.currentSellWindow ?? ''}onChange={(e) => {const newValue = Number(e.target.value);
+            setActiveBasketItem({ ...activeBasketItem,currentSellWindow: newValue, });
+      
+            // Also update it in the basket array
+            setBasket((prev) =>
+              prev.map((item) =>
+                item.id === activeBasketItem.id
+                  ? { ...item, currentSellWindow: newValue }
+                  : item));}}
+              />
+            </div>
+            {/* Threshold For Sell*/}
+              <div className="border-4 border-cyan-800 rounded-4xl p-4 w-60 text-center bg-cyan-700">
+                <p className="font-bold text-white">Selling Threshold</p>
+                <input type="number" placeholder="50" className="border-gray-100/60 mt-2 w-full border-3 px-2 py-1 text-white rounded-xl text-center focus:outline-none focus:ring-0 focus:border-cyan-500" value={activeBasketItem?.currentSellThreshold ?? ''}onChange={(e) => {const newValue = Number(e.target.value);
+            setActiveBasketItem({ ...activeBasketItem,currentSellThreshold: newValue, });
+      
+            // Also update it in the basket array
+            setBasket((prev) =>
+              prev.map((item) =>
+                item.id === activeBasketItem.id
+                  ? { ...item, currentSellThreshold: newValue }
+                  : item));}}
+              />
+                
+              </div>
+            </div>
+
           </div>
+
+        </div>
 
           {/* RIGHT: Weight Pie Chart */}
             {basket.length > 0 && (
@@ -417,14 +447,16 @@ export default function BacktestingPage() {
       <h3 className="text-center text-white mt-10 text-xl mb-7"style={{fontFamily: "Ethnocentric, sans-serif"}}>Simulation Settings</h3>
     </div>
 
-    <div className="border-6 w-160 h-60 border-cyan-700 bg-white rounded-4xl">
+    <div className="border-7 w-200 h-85 border-cyan-700 bg-white rounded-4xl">
       <div
         className="grid grid-cols-[220px_1fr] gap-x-19 gap-y-6 py-7 px-12 text-xl items-center"
         style={{ fontFamily: "Ethnocentric, sans-serif" }}>
     {/*Time frame*/}
-    <h4 className="text-black text-right whitespace-nowrap">
-      Time Frame (YRS)
-    </h4>
+        <h4 className="text-black flex flex-wrap items-baseline whitespace-nowrap">Time Frame
+  <span className="ml-1 text-xs text-gray-400 whitespace-nowrap">
+    In Years | Select 0-10
+  </span>
+</h4>
     <input
       type="number"
       value={timeFrameYears}
@@ -433,7 +465,11 @@ export default function BacktestingPage() {
       placeholder="Enter 1-10"/>
 
     {/* Candle Interval */}
-<h4 className="text-black text-right whitespace-nowrap">Candle Interval</h4>
+    <h4 className="text-black flex flex-wrap items-baseline whitespace-nowrap">Candle Interval
+  <span className="ml-1 text-xs text-gray-400 whitespace-nowrap">
+    Select From Dropdown
+  </span>
+</h4>
 <select
   value={candleInterval}
   onChange={(e) => setCandleInterval(e.target.value)}
@@ -447,9 +483,10 @@ export default function BacktestingPage() {
 </select>
 
     {/* Starting equity */}
-    <h4 className="text-black">
-  Starting Equity
-  <span className="ml-1 text-xs text-gray-400">(thousands)</span>
+    <h4 className="text-black flex flex-wrap items-baseline whitespace-nowrap">Starting Equity
+  <span className="ml-1 text-xs text-gray-400 whitespace-nowrap">
+    In Thousands | 0-999
+  </span>
 </h4>
   
     <input
@@ -458,12 +495,29 @@ export default function BacktestingPage() {
       onChange={(e) => setStartingEquity(Number(e.target.value))}
       className="border-gray-400/60 w-full border-3 py-1 text-black rounded-xl text-center focus:outline-none focus:ring-0 focus:border-gray-200"
       placeholder="10000"/>
+ 
+
+
+{/* Number of stocks to hold */}
+        <h4 className="text-black flex flex-wrap items-baseline whitespace-nowrap">Number Of Stocks
+  <span className="ml-1 text-xs text-gray-400 whitespace-nowrap">
+    Enter 1-100
+  </span>
+</h4>
+  
+    <input
+      type="number"
+      value={stockNumber}
+      onChange={(e) => setStockNumber(Number(e.target.value))}
+      className="border-gray-400/60 w-full border-3 py-1 text-black rounded-xl text-center focus:outline-none focus:ring-0 focus:border-gray-200"
+      placeholder="10000"/>
   </div>
 
   <div>
     <button 
     onClick={runSimulation}
-    className="text-l mt-8 py-3 px-8 border-3 border-cyan-500 bg-cyan-300 rounded-2xl text-white font-bold hover:bg-green-400 transition hover:border-green-600"style={{ fontFamily: "Ethnocentric, sans-serif" }}> Run Simulation
+    className="text-l py-3 px-8 border-6 border-cyan-700 bg-cyan-500 rounded-2xl text-white font-bold 
+    hover:bg-green-400 transition hover:border-green-600"style={{ fontFamily: "Ethnocentric, sans-serif" }}> Run Simulation
     
     </button>
   </div>
